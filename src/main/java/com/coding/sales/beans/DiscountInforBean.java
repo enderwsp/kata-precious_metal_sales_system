@@ -2,6 +2,8 @@ package com.coding.sales.beans;
 
 import com.coding.sales.enums.DiscountType;
 
+import java.math.BigDecimal;
+
 /**
  * @author : wushengping
  * @version V1.0
@@ -18,15 +20,15 @@ public class DiscountInforBean {
     /**
      * 打折
      */
-    private double offVal;
+    private BigDecimal offVal;
     /**
      * 满减金额值要求
      */
-    private double fullValNeed;
+    private BigDecimal fullValNeed;
     /**
      * 满减金额值扣减
      */
-    private double fullDiscountVal;
+    private BigDecimal fullDiscountVal;
     /**
      * 满减相同产品数目值要求
      */
@@ -35,16 +37,16 @@ public class DiscountInforBean {
      * 满减相同产品数目扣减
      * 可能存在打折不为整数
      */
-    private double fullDiscountNum;
+    private BigDecimal fullDiscountNum;
 
     /**
      * 打折券
      *
      * @param woffVal
      */
-    public DiscountInforBean(double woffVal) {
+    public DiscountInforBean(String woffVal) {
         discountType = DiscountType.OffCoupon;
-        offVal = woffVal;
+        offVal = new BigDecimal(woffVal);
     }
 
     /**
@@ -53,10 +55,10 @@ public class DiscountInforBean {
      * @param wfullValNeed
      * @param wfullDiscountVal
      */
-    public DiscountInforBean(double wfullValNeed, double wfullDiscountVal) {
+    public DiscountInforBean(String wfullValNeed, String wfullDiscountVal) {
         discountType = DiscountType.FullDiscountCouponVal;
-        fullValNeed = wfullValNeed;
-        fullDiscountVal = wfullDiscountVal;
+        fullValNeed = new BigDecimal(wfullValNeed);
+        fullDiscountVal = new BigDecimal(wfullDiscountVal);
     }
 
     /**
@@ -65,10 +67,10 @@ public class DiscountInforBean {
      * @param wfullNum
      * @param wfullDiscountNum
      */
-    public DiscountInforBean(int wfullNum, double wfullDiscountNum) {
+    public DiscountInforBean(int wfullNum, String wfullDiscountNum) {
         discountType = DiscountType.FullDiscountCouponNum;
         fullNum = wfullNum;
-        fullDiscountNum = wfullDiscountNum;
+        fullDiscountNum = new BigDecimal(wfullDiscountNum);
     }
 
     public DiscountType getDiscountType() {
@@ -79,27 +81,27 @@ public class DiscountInforBean {
         this.discountType = discountType;
     }
 
-    public double getOffVal() {
+    public BigDecimal getOffVal() {
         return offVal;
     }
 
-    public void setOffVal(double offVal) {
+    public void setOffVal(BigDecimal offVal) {
         this.offVal = offVal;
     }
 
-    public double getFullValNeed() {
+    public BigDecimal getFullValNeed() {
         return fullValNeed;
     }
 
-    public void setFullValNeed(double fullValNeed) {
+    public void setFullValNeed(BigDecimal fullValNeed) {
         this.fullValNeed = fullValNeed;
     }
 
-    public double getFullDiscountVal() {
+    public BigDecimal getFullDiscountVal() {
         return fullDiscountVal;
     }
 
-    public void setFullDiscountVal(double fullDiscountVal) {
+    public void setFullDiscountVal(BigDecimal fullDiscountVal) {
         this.fullDiscountVal = fullDiscountVal;
     }
 
@@ -111,11 +113,11 @@ public class DiscountInforBean {
         this.fullNum = fullNum;
     }
 
-    public double getFullDiscountNum() {
+    public BigDecimal getFullDiscountNum() {
         return fullDiscountNum;
     }
 
-    public void setFullDiscountNum(double fullDiscountNum) {
+    public void setFullDiscountNum(BigDecimal fullDiscountNum) {
         this.fullDiscountNum = fullDiscountNum;
     }
 }

@@ -14,13 +14,13 @@ import com.coding.sales.enums.DiscountType;
 public class ItemAmtCalculatorBuilder {
     public static ItemAmtCalculatorInterface get(DiscountInforBean discountInforBean) {
         if (discountInforBean.getDiscountType().equals(DiscountType.FullDiscountCouponNum)) {
-
+            return new ItemAmtDisNumCalculator();
         }
         if (discountInforBean.getDiscountType().equals(DiscountType.FullDiscountCouponVal)) {
-
+            return new ItemAmtDisAmtCalculator();
         }
         if (discountInforBean.getDiscountType().equals(DiscountType.OffCoupon)) {
-
+            return new ItemAmtOffCalculator();
         }
         return null;
     }

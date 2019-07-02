@@ -1,5 +1,6 @@
 package com.coding.sales.beans;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,17 +26,17 @@ public class PreciousMetalsProductBean {
     /**
      * 客户姓名
      */
-    private Double price;
+    private BigDecimal price;
     /**
      * 客户姓名
      */
     private List<DiscountInforBean> discountInfors;
 
-    public PreciousMetalsProductBean(String wproductName, String wid, String wunit, Double wprice) {
+    public PreciousMetalsProductBean(String wproductName, String wid, String wunit, String wprice) {
         productName = wproductName;
         id = wid;
         unit = wunit;
-        price = wprice;
+        price = new BigDecimal(wprice);
     }
 
     public String getProductName() {
@@ -62,11 +63,11 @@ public class PreciousMetalsProductBean {
         this.unit = unit;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

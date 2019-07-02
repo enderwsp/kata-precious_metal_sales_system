@@ -1,6 +1,7 @@
 package com.coding.sales.order;
 
 import com.coding.sales.beans.DiscountInforBean;
+import com.coding.sales.beans.PreciousMetalsProductBean;
 import com.coding.sales.input.OrderItemCommand;
 
 import java.math.BigDecimal;
@@ -15,7 +16,7 @@ import java.math.BigDecimal;
  */
 public class ItemAmtDisNumCalculator implements ItemAmtCalculatorInterface {
     @Override
-    public BigDecimal calculate(OrderItemCommand item, DiscountInforBean discountInforBean) {
+    public BigDecimal calculate(PreciousMetalsProductBean preciousMetalsProductBean, OrderItemCommand item, DiscountInforBean discountInforBean) {
         return new BigDecimal(0);
     }
 }

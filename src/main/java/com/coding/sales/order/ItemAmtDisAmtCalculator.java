@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  * @version V1.0
  * @Project: kata-precious_metal_sales_system
  * @Package com.coding.sales.beans
- * @Description: 满减计算
+ * @Description: 满减金额计算
  * @date Date : 2019年07月02日 15:41
  */
 public class ItemAmtDisAmtCalculator implements ItemAmtCalculatorInterface {

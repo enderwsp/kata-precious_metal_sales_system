@@ -35,7 +35,7 @@ public class ItemAmtCalculatorUtil {
                 DiscountInforBean usedDiscountInforBean = null;
                 for (DiscountInforBean discountInforBean : preciousMetalsProductBean.getDiscountInfors()) {
                     if (discountInforBean.getDiscountType().getIndex() == DiscountType.OffCoupon.getIndex()
-                            && (!preciousMetalsProductBean.isOffFlag() || (discountCards != null && discountCards.contains(discountInforBean.getName())))) {
+                            && (!preciousMetalsProductBean.isOffFlag() || (discountCards != null && !discountCards.contains(discountInforBean.getName())))) {
                         continue;
                     } else {
                         ItemAmtCalculatorInterface itemAmtCalculatorInterface = ItemAmtCalculatorBuilder.get(discountInforBean);
@@ -50,11 +50,12 @@ public class ItemAmtCalculatorUtil {
                     }
                 }
                 if (usedDiscountInforBean != null && usedDiscountInforBean.getDiscountType().getIndex() == DiscountType.OffCoupon.getIndex()) {
-                    if(discountCardsUsed==null){
-                        discountCardsUsed=new ArrayList<String>();
+                    if (discountCardsUsed == null) {
+                        discountCardsUsed = new ArrayList<String>();
                     }
                     discountCardsUsed.add(usedDiscountInforBean.getName());
                 }
+                return calAmt;
             } else {
                 return calculateNoDis(preciousMetalsProductBean, item);
             }

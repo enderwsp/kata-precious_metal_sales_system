@@ -29,7 +29,7 @@ public class CustomerInforDatas {
     /**
      * 获取所有的会员信息，测试使用检验会员信息
      *
-     * @return
+     * @return 会员信息列表
      */
     public static List<CustomerInforBean> getAllCustomers() {
         List<CustomerInforBean> allCustomers = new ArrayList<CustomerInforBean>(4);
@@ -41,6 +41,11 @@ public class CustomerInforDatas {
         return allCustomers;
     }
 
+    /**
+     * 从会员信息列表中根据会员账户号码获取会员信息
+     * @param memberId
+     * @return 单个会员信息
+     */
     public static CustomerInforBean getCustomersByMemberId(String memberId) {
         List<CustomerInforBean> allCustomers = getAllCustomers();
         for (CustomerInforBean customer : allCustomers) {

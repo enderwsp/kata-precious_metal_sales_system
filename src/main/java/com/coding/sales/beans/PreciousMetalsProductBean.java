@@ -1,5 +1,6 @@
 package com.coding.sales.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,14 +14,29 @@ import java.util.List;
 public class PreciousMetalsProductBean {
     /***/
     private String productName;
-    /**客户姓名*/
+    /**
+     * 客户姓名
+     */
     private String id;
-    /**客户姓名*/
+    /**
+     * 客户姓名
+     */
     private String unit;
-    /**客户姓名*/
+    /**
+     * 客户姓名
+     */
     private Double price;
-    /**客户姓名*/
+    /**
+     * 客户姓名
+     */
     private List<DiscountInforBean> discountInfors;
+
+    public PreciousMetalsProductBean(String wproductName, String wid, String wunit, Double wprice) {
+        productName = wproductName;
+        id = wid;
+        unit = wunit;
+        price = wprice;
+    }
 
     public String getProductName() {
         return productName;
@@ -60,5 +76,12 @@ public class PreciousMetalsProductBean {
 
     public void setDiscountInfors(List<DiscountInforBean> discountInfors) {
         this.discountInfors = discountInfors;
+    }
+
+    public void addDiscountInfor(DiscountInforBean discountInfor) {
+        if (this.discountInfors == null) {
+            this.discountInfors = new ArrayList<DiscountInforBean>();
+        }
+        this.discountInfors.add(discountInfor);
     }
 }

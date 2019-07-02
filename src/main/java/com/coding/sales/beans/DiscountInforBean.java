@@ -11,18 +11,65 @@ import com.coding.sales.enums.DiscountType;
  * @date Date : 2019年07月02日 16:07
  */
 public class DiscountInforBean {
-    /**优惠类型*/
+    /**
+     * 优惠类型
+     */
     private DiscountType discountType;
-    /**满减打折*/
+    /**
+     * 打折
+     */
     private double offVal;
-    /**满减金额值要求*/
+    /**
+     * 满减金额值要求
+     */
     private double fullValNeed;
-    /**满减金额值扣减*/
+    /**
+     * 满减金额值扣减
+     */
     private double fullDiscountVal;
-    /**满减相同产品数目值要求*/
+    /**
+     * 满减相同产品数目值要求
+     */
     private int fullNum;
-    /**满减相同产品数目扣减*/
-    private int fullDiscountNum;
+    /**
+     * 满减相同产品数目扣减
+     * 可能存在打折不为整数
+     */
+    private double fullDiscountNum;
+
+    /**
+     * 打折券
+     *
+     * @param woffVal
+     */
+    public DiscountInforBean(double woffVal) {
+        discountType = DiscountType.OffCoupon;
+        offVal = woffVal;
+    }
+
+    /**
+     * 满减金额
+     *
+     * @param wfullValNeed
+     * @param wfullDiscountVal
+     */
+    public DiscountInforBean(double wfullValNeed, double wfullDiscountVal) {
+        discountType = DiscountType.FullDiscountCouponVal;
+        fullValNeed = wfullValNeed;
+        fullDiscountVal = wfullDiscountVal;
+    }
+
+    /**
+     * 数目扣减
+     *
+     * @param wfullNum
+     * @param wfullDiscountNum
+     */
+    public DiscountInforBean(int wfullNum, double wfullDiscountNum) {
+        discountType = DiscountType.FullDiscountCouponNum;
+        fullNum = wfullNum;
+        fullDiscountNum = wfullDiscountNum;
+    }
 
     public DiscountType getDiscountType() {
         return discountType;
@@ -64,11 +111,11 @@ public class DiscountInforBean {
         this.fullNum = fullNum;
     }
 
-    public int getFullDiscountNum() {
+    public double getFullDiscountNum() {
         return fullDiscountNum;
     }
 
-    public void setFullDiscountNum(int fullDiscountNum) {
+    public void setFullDiscountNum(double fullDiscountNum) {
         this.fullDiscountNum = fullDiscountNum;
     }
 }

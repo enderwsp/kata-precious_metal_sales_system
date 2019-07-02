@@ -27,6 +27,19 @@ public class PreciousMetalsProductBean {
      * 客户姓名
      */
     private BigDecimal price;
+
+    public boolean isOffFlag() {
+        return offFlag;
+    }
+
+    public void setOffFlag(boolean offFlag) {
+        this.offFlag = offFlag;
+    }
+
+    /**
+     * 打折券有效可使用
+     */
+    private boolean offFlag;
     /**
      * 客户姓名
      */

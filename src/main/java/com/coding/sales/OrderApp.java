@@ -1,9 +1,12 @@
 package com.coding.sales;
 
 import com.coding.sales.beans.CustomerInforBean;
+import com.coding.sales.beans.PreciousMetalsProductBean;
 import com.coding.sales.datas.CustomerInforDatas;
+import com.coding.sales.datas.PreciousMetalsProductDatas;
 import com.coding.sales.input.OrderCommand;
 import com.coding.sales.input.OrderItemCommand;
+import com.coding.sales.order.ItemAmtCalculatorUtil;
 import com.coding.sales.output.DiscountItemRepresentation;
 import com.coding.sales.output.OrderItemRepresentation;
 import com.coding.sales.output.OrderRepresentation;
@@ -43,11 +46,23 @@ public class OrderApp {
 
     OrderRepresentation checkout(OrderCommand command) {
         OrderRepresentation result = null;
-
+        if (command == null) {
+            return null;
+        }
         String orderId = command.getOrderId();
         Date createTime = new Date();
         String memberNo = command.getMemberId();
         CustomerInforBean customerInforBean = CustomerInforDatas.getCustomersByMemberId(memberNo);
+        if (customerInforBean == null) {
+//            客户信息未找到
+            return null;
+        }
+        boolean canOff = true;
+//        DiscountInforBean.nineFiveOff
+//                DiscountInforBean.nineOff
+        if (command.getDiscounts() == null || command.getDiscounts().size() == 0) {
+            canOff = false;
+        }
         String memberName = customerInforBean.getName();
         String oldMemberType = customerInforBean.getMemberType().getName();
         String newMemberType = "";
@@ -68,13 +83,28 @@ public class OrderApp {
         List<String> discountCards = new ArrayList<String>();
         for (OrderItemCommand itemCommand : command.getItems()) {
 
+            PreciousMetalsProductBean preciousMetalsProductBean = PreciousMetalsProductDatas.getPreciousMetalsProductById(itemCommand.getProduct());
+            if (preciousMetalsProductBean == null) {
+//                产品信息未找到
+                return null;
+            }
+            preciousMetalsProductBean.setOffFlag(canOff);
+            BigDecimal itemAmtOrg = ItemAmtCalculatorUtil.calculateNoDis(preciousMetalsProductBean, itemCommand);
+            BigDecimal itemAmt = ItemAmtCalculatorUtil.calculate(preciousMetalsProductBean, itemCommand);
+            OrderItemRepresentation orderItemRepresentation = new OrderItemRepresentation(preciousMetalsProductBean.getId(), preciousMetalsProductBean.getProductName()
+                    , preciousMetalsProductBean.getPrice(), itemCommand.getAmount(), itemAmt);
+            orderItems.add(orderItemRepresentation);
+            if (itemAmtOrg.compareTo(itemAmt) > 0) {
+                DiscountItemRepresentation discountItemRepresentation = new DiscountItemRepresentation(preciousMetalsProductBean.getId(), preciousMetalsProductBean.getProductName(), itemAmtOrg.subtract(itemAmt));
+                discounts.add(discountItemRepresentation);
+            }
         }
         result = new OrderRepresentation(orderId, createTime,
                 memberNo, memberName, oldMemberType, newMemberType,
                 memberPointsIncreased, memberPoints,
                 orderItems,
                 totalPrice, discounts, totalDiscountPrice,
-                receivables, payments, discountCards)
+                receivables, payments, discountCards);
         return result;
     }
 }

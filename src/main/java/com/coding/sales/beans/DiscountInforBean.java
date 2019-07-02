@@ -13,6 +13,8 @@ import java.math.BigDecimal;
  * @date Date : 2019年07月02日 16:07
  */
 public class DiscountInforBean {
+    public static String nineOff = "9折券";
+    public static String nineFiveOff = "95折券";
     /**
      * 优惠类型
      */

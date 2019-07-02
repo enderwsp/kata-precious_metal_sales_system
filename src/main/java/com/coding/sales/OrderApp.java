@@ -1,7 +1,16 @@
 package com.coding.sales;
 
 import com.coding.sales.input.OrderCommand;
+import com.coding.sales.input.OrderItemCommand;
+import com.coding.sales.output.DiscountItemRepresentation;
+import com.coding.sales.output.OrderItemRepresentation;
 import com.coding.sales.output.OrderRepresentation;
+import com.coding.sales.output.PaymentRepresentation;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 销售系统的主入口
@@ -26,15 +35,37 @@ public class OrderApp {
     public String checkout(String orderCommand) {
         OrderCommand command = OrderCommand.from(orderCommand);
         OrderRepresentation result = checkout(command);
-        
+
         return result.toString();
     }
 
     OrderRepresentation checkout(OrderCommand command) {
         OrderRepresentation result = null;
 
-        //TODO: 请完成需求指定的功能
+        String orderId = command.getOrderId();
+        Date createTime = new Date();
+        String memberNo =command.getMemberId();
+        String memberName = "";
+        String oldMemberType = "";
+        String newMemberType = "";
+        int memberPointsIncreased = 0;
+        int memberPoints = 0;
+        List<OrderItemRepresentation> orderItems = new ArrayList<OrderItemRepresentation>();
+        BigDecimal totalPrice = new BigDecimal(0);
+        List<DiscountItemRepresentation> discounts = new ArrayList<DiscountItemRepresentation>();
+        BigDecimal totalDiscountPrice = new BigDecimal(0);
+        BigDecimal receivables = new BigDecimal(0);
+        List<PaymentRepresentation> payments = new ArrayList<PaymentRepresentation>();
+        List<String> discountCards = new ArrayList<String>();
+        for (OrderItemCommand itemCommand : command.getItems()) {
 
+        }
+        result = new OrderRepresentation(orderId, createTime,
+                memberNo, memberName, oldMemberType, newMemberType,
+                memberPointsIncreased, memberPoints,
+                orderItems,
+                totalPrice, discounts, totalDiscountPrice,
+                receivables, payments, discountCards)
         return result;
     }
 }

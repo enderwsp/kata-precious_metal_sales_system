@@ -5,24 +5,20 @@ package com.coding.sales.enums;
  * @version V1.0
  * @Project: kata-precious_metal_sales_system
  * @Package com.coding.sales.beans
- * @Description: 会员等级
+ * @Description: 打折券类型
  * @date Date : 2019年07月02日 15:40
  */
-public enum MemberType {
+public enum DiscountType {
     /**
-     * 普卡
+     * 金额满减
      */
-    CardMember,
+    FullDiscountCouponVal,
     /**
-     * 金卡
+     * 相同产品数目满减
      */
-    GoldCardMember,
+    FullDiscountCouponNum,
     /**
-     * 白金卡
+     * 折扣
      */
-    PlatinumCardMember,
-    /**
-     * 钻石卡
-     */
-    DiamondCardMember
+    OffCoupon
 }

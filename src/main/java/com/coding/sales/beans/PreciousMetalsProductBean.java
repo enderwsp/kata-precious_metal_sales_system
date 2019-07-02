@@ -1,12 +1,64 @@
 package com.coding.sales.beans;
 
+import java.util.List;
+
 /**
  * @author : wushnegping
  * @version V1.0
  * @Project: kata-precious_metal_sales_system
  * @Package com.coding.sales.beans
- * @Description: T贵金属信息
+ * @Description: 在售贵金属信息
  * @date Date : 2019年07月02日 15:40
  */
 public class PreciousMetalsProductBean {
+    /***/
+    private String productName;
+    /**客户姓名*/
+    private String id;
+    /**客户姓名*/
+    private String unit;
+    /**客户姓名*/
+    private Double price;
+    /**客户姓名*/
+    private List<DiscountInforBean> discountInfors;
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public List<DiscountInforBean> getDiscountInfors() {
+        return discountInfors;
+    }
+
+    public void setDiscountInfors(List<DiscountInforBean> discountInfors) {
+        this.discountInfors = discountInfors;
+    }
 }

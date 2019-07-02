@@ -11,9 +11,13 @@ import com.coding.sales.enums.MemberType;
  * @date Date : 2019年07月02日 15:41
  */
 public class CustomerInforBean {
+    /**客户姓名*/
     private String name;
+    /**客户会员等级*/
     private MemberType memberType;
+    /**客户账户 号码*/
     private String acNo;
+    /**客户当前积分值*/
     private int currentMemberPoints;
 
     public String getName() {

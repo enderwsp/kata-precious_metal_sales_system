@@ -21,10 +21,13 @@ public class ItemAmtCalculatorUtil {
     public static List<String> discountCardsUsed = null;
 
     public static BigDecimal calculateNoDis(PreciousMetalsProductBean preciousMetalsProductBean, OrderItemCommand item) {
+        BigDecimal amt = new BigDecimal(0);
         if (item != null && preciousMetalsProductBean != null && item.getAmount() != null && ("" + item.getProduct()).equals(preciousMetalsProductBean.getId())) {
+            amt = preciousMetalsProductBean.getPrice().multiply(item.getAmount());
+            System.out.println("calculateNoDis  getAmount" + item.getAmount() + "amt--" + amt);
             return preciousMetalsProductBean.getPrice().multiply(item.getAmount());
         }
-        return new BigDecimal(0);
+        return amt;
     }
 
     public static BigDecimal calculate(List<String> discountCards, PreciousMetalsProductBean preciousMetalsProductBean, OrderItemCommand item) {
@@ -40,6 +43,7 @@ public class ItemAmtCalculatorUtil {
                     } else {
                         ItemAmtCalculatorInterface itemAmtCalculatorInterface = ItemAmtCalculatorBuilder.get(discountInforBean);
                         BigDecimal calAmtOne = itemAmtCalculatorInterface.calculate(preciousMetalsProductBean, item, discountInforBean);
+                        System.out.println("calAmtOne:" + calAmtOne);
                         if (calAmt.compareTo(new BigDecimal(0)) == 0) {
                             calAmt = calAmtOne;
                             usedDiscountInforBean = discountInforBean;

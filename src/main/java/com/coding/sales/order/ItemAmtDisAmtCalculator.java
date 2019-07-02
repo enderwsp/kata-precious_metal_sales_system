@@ -20,6 +20,7 @@ public class ItemAmtDisAmtCalculator implements ItemAmtCalculatorInterface {
         if (item != null && preciousMetalsProductBean != null && item.getAmount() != null && ("" + item.getProduct()).equals(preciousMetalsProductBean.getId())) {
             BigDecimal amt = preciousMetalsProductBean.getPrice().multiply(item.getAmount());
             BigDecimal num = amt.divide(discountInforBean.getFullValNeed(), 0, BigDecimal.ROUND_DOWN);
+            System.out.println("amt:" + amt + "num:" + num + "getAmount" + item.getAmount());
             if (num.compareTo(new BigDecimal(0)) > 0) {
                 amt = amt.subtract(discountInforBean.getFullDiscountVal().multiply(num));
             }

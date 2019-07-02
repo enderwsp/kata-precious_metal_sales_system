@@ -109,7 +109,7 @@ public class OrderApp {
             BigDecimal itemAmt = ItemAmtCalculatorUtil.calculate(command.getDiscounts(), preciousMetalsProductBean, itemCommand);
             receivables = receivables.add(itemAmt);
             OrderItemRepresentation orderItemRepresentation = new OrderItemRepresentation(preciousMetalsProductBean.getId(), preciousMetalsProductBean.getProductName()
-                    , preciousMetalsProductBean.getPrice(), itemCommand.getAmount(), itemAmt);
+                    , preciousMetalsProductBean.getPrice(), itemCommand.getAmount(), itemAmtOrg);
             orderItems.add(orderItemRepresentation);
             BigDecimal discount = itemAmtOrg.subtract(itemAmt);
             totalDiscountPrice = totalDiscountPrice.add(discount);
@@ -131,7 +131,7 @@ public class OrderApp {
         } else if (memberPoints > 50000) {
             newMemberType = MemberType.PlatinumCardMember.getName();
         } else if (memberPoints > 10000) {
-            newMemberType = MemberType.DiamondCardMember.getName();
+            newMemberType = MemberType.GoldCardMember.getName();
         } else {
             newMemberType = MemberType.CardMember.getName();
         }

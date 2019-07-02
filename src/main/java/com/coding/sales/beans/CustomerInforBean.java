@@ -11,14 +11,29 @@ import com.coding.sales.enums.MemberType;
  * @date Date : 2019年07月02日 15:41
  */
 public class CustomerInforBean {
-    /**客户姓名*/
+    /**
+     * 客户姓名
+     */
     private String name;
-    /**客户会员等级*/
+    /**
+     * 客户会员等级
+     */
     private MemberType memberType;
-    /**客户账户 号码*/
-    private String acNo;
-    /**客户当前积分值*/
+    /**
+     * 客户账户 号码
+     */
+    private String memberId;
+    /**
+     * 客户当前积分值
+     */
     private int currentMemberPoints;
+
+    public CustomerInforBean(String wname, MemberType wmemberType, String vmemberId, int wcurrentMemberPoints) {
+        name = wname;
+        memberType = wmemberType;
+        memberId = vmemberId;
+        currentMemberPoints = wcurrentMemberPoints;
+    }
 
     public String getName() {
         return name;
@@ -36,12 +51,12 @@ public class CustomerInforBean {
         this.memberType = memberType;
     }
 
-    public String getAcNo() {
-        return acNo;
+    public String getMemberId() {
+        return memberId;
     }
 
-    public void setAcNo(String acNo) {
-        this.acNo = acNo;
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
     }
 
     public int getCurrentMemberPoints() {

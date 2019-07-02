@@ -12,17 +12,58 @@ public enum MemberType {
     /**
      * 普卡
      */
-    CardMember,
+    CardMember("普卡", 1),
     /**
      * 金卡
      */
-    GoldCardMember,
+    GoldCardMember("金卡", 2),
     /**
      * 白金卡
      */
-    PlatinumCardMember,
+    PlatinumCardMember("白金卡", 3),
     /**
      * 钻石卡
      */
-    DiamondCardMember
+    DiamondCardMember("钻石卡", 4);
+    private String name;
+    private int index;
+
+    private MemberType(String name, int index) {
+        this.name = name;
+        this.index = index;
+    }
+
+    public static String getName(int index) {
+        for (MemberType c : MemberType.values()) {
+            if (c.getIndex() == index) {
+                return c.name;
+            }
+        }
+        return null;
+    }
+
+    // get set 方法
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    // 覆盖方法
+    @Override
+    public String toString() {
+        return this.index + "_" + this.name;
+    }
+
+
 }

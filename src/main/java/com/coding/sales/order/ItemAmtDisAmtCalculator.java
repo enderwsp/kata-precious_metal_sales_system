@@ -17,6 +17,13 @@ import java.math.BigDecimal;
 public class ItemAmtDisAmtCalculator implements ItemAmtCalculatorInterface {
     @Override
     public BigDecimal calculate(PreciousMetalsProductBean preciousMetalsProductBean, OrderItemCommand item, DiscountInforBean discountInforBean) {
+        if (item != null && preciousMetalsProductBean != null && item.getAmount() != null && ("" + item.getProduct()).equals(preciousMetalsProductBean.getId())) {
+            BigDecimal amt = preciousMetalsProductBean.getPrice().multiply(item.getAmount());
+            if (amt.compareTo(discountInforBean.getFullValNeed()) > -1) {
+                amt = amt.subtract(discountInforBean.getFullDiscountVal())
+            }
+            return amt;
+        }
         return new BigDecimal(0);
     }
 }

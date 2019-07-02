@@ -32,7 +32,7 @@ public class DiscountInforBean {
     /**
      * 满减相同产品数目值要求
      */
-    private int fullNum;
+    private int fullNumNeed;
     /**
      * 满减相同产品数目扣减
      * 可能存在打折不为整数
@@ -69,7 +69,7 @@ public class DiscountInforBean {
      */
     public DiscountInforBean(int wfullNum, String wfullDiscountNum) {
         discountType = DiscountType.FullDiscountCouponNum;
-        fullNum = wfullNum;
+        fullNumNeed = wfullNum;
         fullDiscountNum = new BigDecimal(wfullDiscountNum);
     }
 
@@ -105,12 +105,12 @@ public class DiscountInforBean {
         this.fullDiscountVal = fullDiscountVal;
     }
 
-    public int getFullNum() {
-        return fullNum;
+    public int getFullNumNeed() {
+        return fullNumNeed;
     }
 
-    public void setFullNum(int fullNum) {
-        this.fullNum = fullNum;
+    public void setFullNumNeed(int fullNumNeed) {
+        this.fullNumNeed = fullNumNeed;
     }
 
     public BigDecimal getFullDiscountNum() {

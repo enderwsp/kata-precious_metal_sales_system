@@ -17,6 +17,10 @@ import java.math.BigDecimal;
 public class ItemAmtOffCalculator implements ItemAmtCalculatorInterface {
     @Override
     public BigDecimal calculate(PreciousMetalsProductBean preciousMetalsProductBean, OrderItemCommand item, DiscountInforBean discountInforBean) {
+        if (item != null && preciousMetalsProductBean != null && item.getAmount() != null && ("" + item.getProduct()).equals(preciousMetalsProductBean.getId())) {
+            BigDecimal amt = preciousMetalsProductBean.getPrice().multiply(item.getAmount());
+            return amt.multiply(discountInforBean.getOffVal());
+        }
         return new BigDecimal(0);
     }
 }

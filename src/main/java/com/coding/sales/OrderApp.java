@@ -72,15 +72,20 @@ public class OrderApp {
         int memberPoints = 0;
 //        订单明细
         List<OrderItemRepresentation> orderItems = new ArrayList<OrderItemRepresentation>();
+//        订单总金额
         BigDecimal totalPrice = new BigDecimal(0);
 //        优惠明细
         List<DiscountItemRepresentation> discounts = new ArrayList<DiscountItemRepresentation>();
+//        优惠总金额
         BigDecimal totalDiscountPrice = new BigDecimal(0);
+//         应收金额
         BigDecimal receivables = new BigDecimal(0);
 //        付款记录
         List<PaymentRepresentation> payments = new ArrayList<PaymentRepresentation>();
 //        付款使用的打折券
         List<String> discountCards = new ArrayList<String>();
+//        清空使用的折扣券
+        ItemAmtCalculatorUtil.discountCardsUsed = new ArrayList<String>();
         for (OrderItemCommand itemCommand : command.getItems()) {
 
             PreciousMetalsProductBean preciousMetalsProductBean = PreciousMetalsProductDatas.getPreciousMetalsProductById(itemCommand.getProduct());
@@ -90,12 +95,16 @@ public class OrderApp {
             }
             preciousMetalsProductBean.setOffFlag(canOff);
             BigDecimal itemAmtOrg = ItemAmtCalculatorUtil.calculateNoDis(preciousMetalsProductBean, itemCommand);
-            BigDecimal itemAmt = ItemAmtCalculatorUtil.calculate(preciousMetalsProductBean, itemCommand);
+            totalPrice = totalPrice.add(itemAmtOrg);
+            BigDecimal itemAmt = ItemAmtCalculatorUtil.calculate(command.getDiscounts(), preciousMetalsProductBean, itemCommand);
+            receivables = receivables.add(itemAmt);
             OrderItemRepresentation orderItemRepresentation = new OrderItemRepresentation(preciousMetalsProductBean.getId(), preciousMetalsProductBean.getProductName()
                     , preciousMetalsProductBean.getPrice(), itemCommand.getAmount(), itemAmt);
             orderItems.add(orderItemRepresentation);
+            BigDecimal discount = itemAmtOrg.subtract(itemAmt);
+            totalDiscountPrice = totalDiscountPrice.add(discount);
             if (itemAmtOrg.compareTo(itemAmt) > 0) {
-                DiscountItemRepresentation discountItemRepresentation = new DiscountItemRepresentation(preciousMetalsProductBean.getId(), preciousMetalsProductBean.getProductName(), itemAmtOrg.subtract(itemAmt));
+                DiscountItemRepresentation discountItemRepresentation = new DiscountItemRepresentation(preciousMetalsProductBean.getId(), preciousMetalsProductBean.getProductName(), discount);
                 discounts.add(discountItemRepresentation);
             }
         }

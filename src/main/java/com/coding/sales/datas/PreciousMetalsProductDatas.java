@@ -89,6 +89,13 @@ public class PreciousMetalsProductDatas {
     public static PreciousMetalsProductBean prdNum002003 = new PreciousMetalsProductBean("中国银象棋12g", "002003", "套", "698.00");
 
     static {
+        nineOff.setName("9折券");
+        nineFiveOff.setName("95折券");
+        threeNumDis.setName("第3件半价");
+        fourNumDis.setName("满3送1");
+        threeThousandDis.setName("每满3000元减350");
+        twoThousandDis.setName("每满2000元减30");
+        oneThousandDis.setName("每满1000元减10");
         prdNum001002.addDiscountInfor(nineOff);
         prdNum003001.addDiscountInfor(nineFiveOff);
         prdNum003002.addDiscountInfor(threeNumDis);

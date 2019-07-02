@@ -1,5 +1,7 @@
 package com.coding.sales;
 
+import com.coding.sales.beans.CustomerInforBean;
+import com.coding.sales.datas.CustomerInforDatas;
 import com.coding.sales.input.OrderCommand;
 import com.coding.sales.input.OrderItemCommand;
 import com.coding.sales.output.DiscountItemRepresentation;
@@ -44,18 +46,25 @@ public class OrderApp {
 
         String orderId = command.getOrderId();
         Date createTime = new Date();
-        String memberNo =command.getMemberId();
-        String memberName = "";
-        String oldMemberType = "";
+        String memberNo = command.getMemberId();
+        CustomerInforBean customerInforBean = CustomerInforDatas.getCustomersByMemberId(memberNo);
+        String memberName = customerInforBean.getName();
+        String oldMemberType = customerInforBean.getMemberType().getName();
         String newMemberType = "";
+        //本次消费会员新增的积分
         int memberPointsIncreased = 0;
+        //会员最新的积分
         int memberPoints = 0;
+//        订单明细
         List<OrderItemRepresentation> orderItems = new ArrayList<OrderItemRepresentation>();
         BigDecimal totalPrice = new BigDecimal(0);
+//        优惠明细
         List<DiscountItemRepresentation> discounts = new ArrayList<DiscountItemRepresentation>();
         BigDecimal totalDiscountPrice = new BigDecimal(0);
         BigDecimal receivables = new BigDecimal(0);
+//        付款记录
         List<PaymentRepresentation> payments = new ArrayList<PaymentRepresentation>();
+//        付款使用的打折券
         List<String> discountCards = new ArrayList<String>();
         for (OrderItemCommand itemCommand : command.getItems()) {
 

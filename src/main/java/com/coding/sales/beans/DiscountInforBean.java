@@ -17,6 +17,19 @@ public class DiscountInforBean {
      * 优惠类型
      */
     private DiscountType discountType;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * 优惠名称
+     */
+    private String name;
     /**
      * 打折
      */

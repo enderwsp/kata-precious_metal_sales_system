@@ -19,8 +19,9 @@ public class ItemAmtDisAmtCalculator implements ItemAmtCalculatorInterface {
     public BigDecimal calculate(PreciousMetalsProductBean preciousMetalsProductBean, OrderItemCommand item, DiscountInforBean discountInforBean) {
         if (item != null && preciousMetalsProductBean != null && item.getAmount() != null && ("" + item.getProduct()).equals(preciousMetalsProductBean.getId())) {
             BigDecimal amt = preciousMetalsProductBean.getPrice().multiply(item.getAmount());
-            if (amt.compareTo(discountInforBean.getFullValNeed()) > -1) {
-                amt = amt.subtract(discountInforBean.getFullDiscountVal())
+            BigDecimal num = amt.divide(discountInforBean.getFullValNeed(), 0, BigDecimal.ROUND_DOWN);
+            if (num.compareTo(new BigDecimal(0)) > 0) {
+                amt = amt.subtract(discountInforBean.getFullDiscountVal().multiply(num));
             }
             return amt;
         }

@@ -91,18 +91,21 @@ public class PreciousMetalsProductDatas {
     static {
         nineOff.setName(DiscountInforBean.nineOff);
         nineFiveOff.setName(DiscountInforBean.nineFiveOff);
-        threeNumDis.setName("第3件半价");
-        fourNumDis.setName("满3送1");
-        threeThousandDis.setName("每满3000元减350");
-        twoThousandDis.setName("每满2000元减30");
-        oneThousandDis.setName("每满1000元减10");
+        threeNumDis.setName(DiscountInforBean.threeNum);
+        fourNumDis.setName(DiscountInforBean.fourNum);
+        threeThousandDis.setName(DiscountInforBean.threeThousand);
+        twoThousandDis.setName(DiscountInforBean.twoThousand);
+        oneThousandDis.setName(DiscountInforBean.oneThousand);
         prdNum001002.addDiscountInfor(nineOff);
         prdNum003001.addDiscountInfor(nineFiveOff);
         prdNum003002.addDiscountInfor(threeNumDis);
         prdNum003002.addDiscountInfor(fourNumDis);
         prdNum002002.addDiscountInfor(twoThousandDis);
         prdNum002002.addDiscountInfor(oneThousandDis);
+        prdNum002001.addDiscountInfor(threeNumDis);
+        prdNum002001.addDiscountInfor(fourNumDis);
         prdNum002001.addDiscountInfor(nineFiveOff);
+        prdNum002003.addDiscountInfor(nineFiveOff);
         prdNum002003.addDiscountInfor(threeThousandDis);
         prdNum002003.addDiscountInfor(twoThousandDis);
         prdNum002003.addDiscountInfor(oneThousandDis);

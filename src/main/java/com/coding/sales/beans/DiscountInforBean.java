@@ -15,6 +15,11 @@ import java.math.BigDecimal;
 public class DiscountInforBean {
     public static String nineOff = "9折券";
     public static String nineFiveOff = "95折券";
+    public static String threeNum = "第3件半价";
+    public static String fourNum = "满3送1";
+    public static String threeThousand = "每满3000元减350";
+    public static String twoThousand = "每满2000元减30";
+    public static String oneThousand = "每满1000元减10";
     /**
      * 优惠类型
      */

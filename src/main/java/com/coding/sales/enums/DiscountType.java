@@ -1,7 +1,7 @@
 package com.coding.sales.enums;
 
 /**
- * @author : wushnegping
+ * @author : wushengping
  * @version V1.0
  * @Project: kata-precious_metal_sales_system
  * @Package com.coding.sales.beans

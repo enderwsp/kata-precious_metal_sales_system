@@ -10,6 +10,9 @@ import com.coding.sales.input.OrderItemCommand;
  * @Description: 满减计算
  * @date Date : 2019年07月02日 15:41
  */
-public interface ItemAmtCalculatorInterface {
-    double calculate(OrderItemCommand item, DiscountInforBean discountInforBean);
+public class ItemAmtDiscountCalculator implements ItemAmtCalculatorInterface {
+    @Override
+    public double calculate(OrderItemCommand item, DiscountInforBean discountInforBean) {
+        return 1.00;
+    }
 }

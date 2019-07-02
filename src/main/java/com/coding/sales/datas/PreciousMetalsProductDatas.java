@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author : wushnegping
+ * @author : wushengping
  * @version V1.0
  * @Project: kata-precious_metal_sales_system
  * @Package com.coding.sales.datas

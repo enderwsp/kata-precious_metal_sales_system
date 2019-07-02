@@ -3,7 +3,7 @@ package com.coding.sales.beans;
 import com.coding.sales.enums.DiscountType;
 
 /**
- * @author : wushnegping
+ * @author : wushengping
  * @version V1.0
  * @Project: kata-precious_metal_sales_system
  * @Package com.coding.sales.beans

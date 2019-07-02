@@ -1,5 +1,7 @@
 package com.coding.sales.enums;
 
+import java.math.BigDecimal;
+
 /**
  * @author : wushengping
  * @version V1.0
@@ -12,25 +14,35 @@ public enum MemberType {
     /**
      * 普卡
      */
-    CardMember("普卡", 1),
+    CardMember("普卡", 1, "1"),
     /**
      * 金卡
      */
-    GoldCardMember("金卡", 2),
+    GoldCardMember("金卡", 2, "1.5"),
     /**
      * 白金卡
      */
-    PlatinumCardMember("白金卡", 3),
+    PlatinumCardMember("白金卡", 3, "1.8"),
     /**
      * 钻石卡
      */
-    DiamondCardMember("钻石卡", 4);
+    DiamondCardMember("钻石卡", 4, "2");
     private String name;
     private int index;
+    private BigDecimal multiple;
 
-    private MemberType(String name, int index) {
+    public BigDecimal getMultiple() {
+        return multiple;
+    }
+
+    public void setMultiple(BigDecimal multiple) {
+        this.multiple = multiple;
+    }
+
+    MemberType(String name, int index, String multiples) {
         this.name = name;
         this.index = index;
+        this.multiple = new BigDecimal(multiples);
     }
 
     public static String getName(int index) {

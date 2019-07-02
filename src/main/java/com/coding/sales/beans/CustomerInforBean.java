@@ -11,6 +11,7 @@ import com.coding.sales.enums.MemberType;
  * @date Date : 2019年07月02日 15:41
  */
 public class CustomerInforBean {
+    public static String payType = "余额支付";
     /**
      * 客户姓名
      */

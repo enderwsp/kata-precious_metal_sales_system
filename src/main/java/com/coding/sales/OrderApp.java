@@ -4,6 +4,7 @@ import com.coding.sales.beans.CustomerInforBean;
 import com.coding.sales.beans.PreciousMetalsProductBean;
 import com.coding.sales.datas.CustomerInforDatas;
 import com.coding.sales.datas.PreciousMetalsProductDatas;
+import com.coding.sales.enums.MemberType;
 import com.coding.sales.input.OrderCommand;
 import com.coding.sales.input.OrderItemCommand;
 import com.coding.sales.order.ItemAmtCalculatorUtil;
@@ -13,6 +14,9 @@ import com.coding.sales.output.OrderRepresentation;
 import com.coding.sales.output.PaymentRepresentation;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -50,7 +54,15 @@ public class OrderApp {
             return null;
         }
         String orderId = command.getOrderId();
-        Date createTime = new Date();
+//        2019-07-02 15:00:00
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        ParsePosition pos = new ParsePosition(8);
+        Date createTime = null;
+        try {
+            createTime = formatter.parse(command.getCreateTime());
+        } catch (ParseException e) {
+            return null;
+        }
         String memberNo = command.getMemberId();
         CustomerInforBean customerInforBean = CustomerInforDatas.getCustomersByMemberId(memberNo);
         if (customerInforBean == null) {
@@ -66,10 +78,8 @@ public class OrderApp {
         String memberName = customerInforBean.getName();
         String oldMemberType = customerInforBean.getMemberType().getName();
         String newMemberType = "";
-        //本次消费会员新增的积分
-        int memberPointsIncreased = 0;
-        //会员最新的积分
-        int memberPoints = 0;
+
+
 //        订单明细
         List<OrderItemRepresentation> orderItems = new ArrayList<OrderItemRepresentation>();
 //        订单总金额
@@ -108,6 +118,26 @@ public class OrderApp {
                 discounts.add(discountItemRepresentation);
             }
         }
+        int currentPoints = customerInforBean.getCurrentMemberPoints();
+        //本次消费会员新增的积分
+        BigDecimal increased = receivables.multiply(customerInforBean.getMemberType().getMultiple());
+        increased = increased.setScale(0, BigDecimal.ROUND_DOWN);
+        //本次消费会员新增的积分
+        int memberPointsIncreased = increased.intValue();
+        //会员最新的积分
+        int memberPoints = currentPoints + memberPointsIncreased;
+        if (memberPoints > 100000) {
+            newMemberType = MemberType.DiamondCardMember.getName();
+        } else if (memberPoints > 50000) {
+            newMemberType = MemberType.PlatinumCardMember.getName();
+        } else if (memberPoints > 10000) {
+            newMemberType = MemberType.DiamondCardMember.getName();
+        } else {
+            newMemberType = MemberType.CardMember.getName();
+        }
+        PaymentRepresentation paymentRepresentation = new PaymentRepresentation(CustomerInforBean.payType, receivables);
+        payments.add(paymentRepresentation);
+        discountCards = ItemAmtCalculatorUtil.discountCardsUsed;
         result = new OrderRepresentation(orderId, createTime,
                 memberNo, memberName, oldMemberType, newMemberType,
                 memberPointsIncreased, memberPoints,
